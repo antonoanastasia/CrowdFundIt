@@ -1,4 +1,4 @@
-# CrowdfundIt
+# 💰 CrowdfundIt
 Crowdfunding Management Platform
 
 ## Table of Contents
