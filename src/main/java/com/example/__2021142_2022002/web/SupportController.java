@@ -46,9 +46,12 @@ public class SupportController {
                     @ApiResponse(responseCode = "404", description = "Το έργο δεν βρέθηκε ή δεν είναι διαθέσιμο")
             }
     )
-    @PostMapping("/{projectId}")
+    @PostMapping(path="/{projectId}", consumes = "application/x-www-form-urlencoded")
     @PreAuthorize("hasRole('BACKER')")
-    public Project pledge(@PathVariable Long projectId, @RequestBody SupportReq req, Principal me){
-        return svc.support(projectId, req.amount(), me != null ? me.getName() : "anonymous");
+    public Project pledgeForm(@PathVariable Long projectId,
+                          @RequestParam("amount") BigDecimal amount,
+                          Principal me){
+                    return svc.support(projectId, amount, me != null ? me.getName() : "anonymous");
     }
+
 }
