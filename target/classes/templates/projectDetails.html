@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Project Details - CrowdfundIt</title>
@@ -9,7 +8,7 @@
         body {
             margin: 0;
             height: 100vh;
-            background: url('/img/IMG_4964.jpg') no-repeat center center fixed;
+            background: url('file:///Users/antonoanastasia/Desktop/IMG_4964.jpg') no-repeat center center fixed;
             background-size: cover;
             font-family: Arial, sans-serif;
         }
@@ -36,43 +35,23 @@
 
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark navbar-custom px-4">
-    <a class="navbar-brand fw-bold" th:href="@{/}">CrowdfundIt</a>
-
+    <a class="navbar-brand fw-bold" href="home.html">CrowdfundIt</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
-            <li class="nav-item"><a class="nav-link" th:href="@{/projects}">Projects</a></li>
-
-            <!-- Μόνο για ADMIN -->
-            <li class="nav-item" sec:authorize="hasRole('ADMIN')">
-                <a class="nav-link" th:href="@{/admin/dashboard}">Admin Dashboard</a>
-            </li>
-
-            <!-- Μόνο για CREATOR -->
-            <li class="nav-item" sec:authorize="hasRole('CREATOR')">
-                <a class="nav-link" th:href="@{/projects/creator/dashboard}">My Dashboard</a>
-            </li>
-
-            <!-- Μόνο για BACKER -->
-            <li class="nav-item" sec:authorize="hasRole('BACKER')">
-                <a class="nav-link" th:href="@{/backer/dashboard}">My Dashboard</a>
-            </li>
-
-            <!-- Ανώνυμος χρήστης -->
-            <li class="nav-item" sec:authorize="isAnonymous()">
-                <a class="nav-link" th:href="@{/login}">Login</a>
-            </li>
-            <li class="nav-item" sec:authorize="isAnonymous()">
-                <a class="nav-link" th:href="@{/register}">Register</a>
-            </li>
+            <li class="nav-item"><a class="nav-link" href="home.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="projectList.html">Projects</a></li>
+            <!-- Αν είναι Admin -->
+            <li class="nav-item" th:if="${role == 'ADMIN'}"><a class="nav-link" href="AdminDashboard.html">Admin Dashboard</a></li>
+            <!-- Αν είναι Creator -->
+            <li class="nav-item" th:if="${role == 'CREATOR'}"><a class="nav-link" href="CreatorDashboard.html">My Dashboard</a></li>
+            <!-- Αν είναι Backer -->
+            <li class="nav-item" th:if="${role == 'BACKER'}"><a class="nav-link" href="BackerDashboard.html">My Dashboard</a></li>
         </ul>
     </div>
 </nav>
-
 
 <!-- Project Details -->
 <div class="project-box">
@@ -98,11 +77,12 @@
     <!-- Backer: Show Support Form -->
     <div th:if="${role == 'BACKER' and project.status == 'FUNDING'}">
         <form th:action="@{/support/{id}(id=${project.id})}" method="post">
-            <label class="form-label">Enter your pledge (€)</label>
-            <input type="number" step="0.01" min="1" id="amount" name="amount" class="form-control" required>
+            <div class="mb-3">
+                <label for="amount" class="form-label">Enter your pledge (€)</label>
+                <input type="number" step="0.01" min="1" id="amount" name="amount" class="form-control" required>
+            </div>
             <button type="submit" class="btn btn-support">Support this Project</button>
         </form>
-
     </div>
 
     <!-- Creator: Show Edit button -->
@@ -120,7 +100,7 @@
         </form>
     </div>
 
-
+    <!-- If project is closed -->
     <div th:if="${project.status != 'FUNDING'}" class="alert alert-info mt-3">
         This project is no longer open for funding.
     </div>

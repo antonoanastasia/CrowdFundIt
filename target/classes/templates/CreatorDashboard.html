@@ -8,7 +8,7 @@
         body {
             margin: 0;
             height: 100vh;
-            background: url('/img/IMG_4964.jpg') no-repeat center center fixed;
+            background: url('file:///Users/antonoanastasia/Desktop/IMG_4964.jpg') no-repeat center center fixed;
             background-size: cover;
             font-family: Arial, sans-serif;
         }
@@ -101,17 +101,17 @@
             Send Update to Backers
         </div>
         <div class="card-body">
-            <form action="#" method="post th:action="@{#}">
+            <form action="#" method="post">
                 <div class="mb-3">
                     <label class="form-label">Select Project</label>
-                    <select name="projectId" class="form-select" th:field="*{projectId}">
+                    <select name="projectId" class="form-select">
                         <option value="1">Smart Garden System</option>
                         <option value="2">Solar Power Backpack</option>
                     </select>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Message</label>
-                    <textarea name="message" class="form-control" rows="3" placeholder="Write an update for your backers" th:field="*{message}"></textarea>
+                    <textarea name="message" class="form-control" rows="3" placeholder="Write an update for your backers"></textarea>
                 </div>
                 <button type="submit" class="btn btn-dark">Send Update</button>
             </form>

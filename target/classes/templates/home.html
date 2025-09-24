@@ -8,7 +8,7 @@
         body {
             margin: 0;
             height: 100vh;
-            background: url('/img/IMG_4964.jpg') no-repeat center center fixed;
+            background: url('file:///Users/antonoanastasia/Desktop/IMG_4964.jpg') no-repeat center center fixed;
             background-size: cover;
             font-family: Arial, sans-serif;
         }
@@ -52,34 +52,29 @@
 
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark navbar-custom px-4">
-    <a class="navbar-brand fw-bold" th:href="@{/}">CrowdfundIt</a>
-
+    <a class="navbar-brand fw-bold" th:href="@{/home}">CrowdfundIt</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
-            <li class="nav-item"><a class="nav-link" th:href="@{/login}">Login</a></li>
-            <li class="nav-item"><a class="nav-link" th:href="@{/register}">Register</a></li>
-        </ul>
+    <li class="nav-item"><a class="nav-link" href="home.html">Home</a></li>
+    <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+    <li class="nav-item"><a class="nav-link" href="register.html">Register</a></li>
+</ul>
     </div>
 </nav>
-
 
 <!-- Search Box -->
 <div class="d-flex justify-content-center align-items-center">
     <div class="search-box text-center">
         <h5 class="mb-3">Find Projects</h5>
-        <!-- ΔΙΟΡΘΩΣΗ: προστέθηκε th:object="${search}" -->
-        <form th:action="@{/projects/search}" method="get" th:object="${search}">
-        <div class="mb-3">
-                <input type="text" name="keyword" class="form-control"
-                       placeholder="Search by title or description" th:field="*{keyword}">
+        <form th:action="@{/projects/search}" method="get">
+            <div class="mb-3">
+                <input type="text" name="keyword" class="form-control" placeholder="Search by title or description">
             </div>
             <div class="mb-3">
-                <select class="form-select" name="status" th:field="*{status}">
+                <select class="form-select" name="status">
                     <option value="">All Status</option>
                     <option value="FUNDING">Funding</option>
                     <option value="COMPLETED">Completed</option>
@@ -88,8 +83,8 @@
             <button type="submit" class="btn btn-search">Search</button>
         </form>
         <hr>
-        <a th:href="@{/projects}" class="btn btn-outline-dark btn-sm mt-2">Browse All Projects</a>
-        <a th:href="@{/projects/create}" class="btn btn-outline-primary btn-sm mt-2">Start a Project</a>
+        <a href="projectList.html" class="btn btn-outline-dark btn-sm mt-2">Browse All Projects</a>
+        <a href="projectCreate.html" class="btn btn-outline-primary btn-sm mt-2">Start a Project</a>
     </div>
 </div>
 

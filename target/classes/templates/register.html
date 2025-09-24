@@ -8,7 +8,7 @@
         body {
             margin: 0;
             height: 100vh;
-            background: url('/img/IMG_4964.jpg') no-repeat center center fixed;
+            background: url('file:///Users/antonoanastasia/Desktop/IMG_4964.jpg') no-repeat center center fixed;
             background-size: cover;
             font-family: Arial, sans-serif;
         }
@@ -68,19 +68,29 @@
         <h4 class="text-center">Create Account</h4>
 
         <!-- Register Form -->
-        <form th:action="@{/register}" th:object="${user}" method="post">
-            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-            <input type="text" th:field="*{username}" required>
-            <input type="password" th:field="*{passwordHash}" required>
-            <select th:field="*{roles}" class="form-select" required>
-                <option value="CREATOR">Creator</option>
-                <option value="BACKER">Backer</option>
-                <!-- αν θες και admin: -->
-                <!-- <option value="ADMIN">Admin</option> -->
-            </select>
+        <form id="registerForm">
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" id="username" name="username" class="form-control" placeholder="Enter username" required>
+            </div>
 
-            <button type="submit">Register</button>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Enter password" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="role" class="form-label">Role</label>
+                <select id="role" name="role" class="form-select" required>
+                    <option value="CREATOR">Creator</option>
+                    <option value="BACKER">Backer</option>
+                    <option value="ADMIN">Admin</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-register mt-2">Register</button>
         </form>
+
         <hr>
         <p class="text-center">
             Already have an account? <a href="login.html">Login here</a>
