@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Projects - CrowdfundIt</title>
@@ -9,7 +8,7 @@
         body {
             margin: 0;
             height: 100vh;
-            background: url('/img/IMG_4964.jpg') no-repeat center center fixed;
+            background: url('file:///Users/antonoanastasia/Desktop/IMG_4964.jpg') no-repeat center center fixed;
             background-size: cover;
             font-family: Arial, sans-serif;
         }
@@ -86,14 +85,10 @@
                     <!-- Details button -->
                     <a th:href="@{'/projects/' + ${p.id}}" class="btn btn-info btn-sm">Details</a>
 
-                    <!-- Fund form (μόνο για Backer) -->
-                  <form th:if="${#authentication.principal?.role == 'BACKER'}"
-                        th:action="@{'/support/' + ${p.id}}" method="post" class="d-inline">
-                   <input type="number" name="amount" min="1" step="0.01" placeholder="€" required
-                           class="form-control d-inline" style="width:8rem">
-                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-                    <button type="submit" class="btn btn-fund btn-sm">Fund</button>
-                  </form>
+                    <!-- Fund button (μόνο για Backer) -->
+                    <a th:if="${#authentication.principal?.role == 'BACKER'}"
+                       th:href="@{'/support/' + ${p.id}}" 
+                       class="btn btn-fund btn-sm">Fund</a>
                 </div>
             </div>
         </div>
