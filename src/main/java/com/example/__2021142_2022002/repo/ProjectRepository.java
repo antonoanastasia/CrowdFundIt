@@ -4,7 +4,10 @@ import com.example.__2021142_2022002.domain.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
 import jakarta.persistence.LockModeType;
+import org.springframework.stereotype.Repository;
+
 import java.util.*;
+@Repository
 
 public interface ProjectRepository extends JpaRepository<Project, Long> {
     List<Project> findByStatus(ProjectStatus status);
